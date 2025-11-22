@@ -2,15 +2,15 @@ import torch
 from torchvision import transforms
 from PIL import Image
 import matplotlib.pyplot as plt
-from model import CatDogCNN
-from utils import load_checkpoint
+from light_model import LightCatDogCNN
+from utils_english import load_checkpoint
 import argparse
 
-def predict_single_image(image_path, model_path='models/best_model.pth'):
+def predict_single_image(image_path, model_path='models/light_best_model.pth'):
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     
     # 加载模型
-    model = CatDogCNN(num_classes=2)
+    model = LightCatDogCNN(num_classes=2)
     checkpoint = load_checkpoint(model_path, model)
     
     if checkpoint is None:
@@ -58,8 +58,8 @@ def predict_single_image(image_path, model_path='models/best_model.pth'):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description='预测单张猫狗图片')
-    parser.add_argument('image_path', type=str, help='输入图片路径')
-    parser.add_argument('--model', type=str, default='models/best_model.pth', help='模型路径')
+    parser.add_argument('image_path', type=str, help='图片路径')
+    parser.add_argument('--model', type=str, default='light_best_model.pth', help='模型路径')
     
     args = parser.parse_args()
     
