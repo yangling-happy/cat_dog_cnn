@@ -5,6 +5,8 @@ import numpy as np
 import seaborn as sns
 from sklearn.metrics import confusion_matrix
 import os
+plt.rcParams['font.sans-serif'] = ['SimHei']  # 替换为系统可用的中文字体
+plt.rcParams['axes.unicode_minus'] = False    # 解决负号显示问题
 
 def plot_training_history_english(train_losses, val_losses, train_accs, val_accs):
     """绘制训练历史图表（英文版）"""
@@ -117,7 +119,7 @@ def load_checkpoint(filename, model, optimizer=None):
     """Load model checkpoint"""
     filepath = os.path.join('models', filename)
     if os.path.isfile(filepath):
-        checkpoint = torch.load(filepath)
+        checkpoint = torch.load(filepath, weights_only=True)
         model.load_state_dict(checkpoint['model_state_dict'])
         if optimizer and 'optimizer_state_dict' in checkpoint:
             optimizer.load_state_dict(checkpoint['optimizer_state_dict'])

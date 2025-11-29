@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 import time
 import os
 from light_model import LightCatDogCNN
-from utils import plot_training_history, save_checkpoint
+from utils_english import plot_training_history_english, save_checkpoint
 
 # 设置设备
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -163,7 +163,7 @@ def train_light_model():
             break
     
     # 绘制训练历史
-    plot_training_history(train_losses, val_losses, train_accs, val_accs)
+    plot_training_history_english(train_losses, val_losses, train_accs, val_accs)
     
     print(f"训练完成！最佳验证准确率: {best_val_acc:.4f}")
     
